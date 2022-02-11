@@ -17,10 +17,11 @@ public class Russian_Doll_Envelopes_354 { /** accepted (speed: fast) **/
 
     }
 
-    public static int maxEnvelopes(int[][] envelopes) {
+    public static int maxEnvelopes(int[][] envelopes) { /** We are doing some kind of sorting, and then we find LIS **/
 
-        Arrays.sort(envelopes, (a,b) -> {
-            if(a[0] != b[0]) return a[0] - b[0];
+        Arrays.sort(envelopes, (a,b) -> { // Implementing a comparator convenient for our purposes, we are sorting dolls[i][j] in non-decreasing order
+            // in terms of dolls[i][0] and then for all dolls with equal dolls[i][0] we are sorting dolls[i][j] in non-increasing order in terms of dolls[i][1]
+            if(a[0] != b[0]) return a[0] - b[0]; // after it's done we may proceed to the last step of our algo - LIS
             else return b[1] - a[1];
         });
 
@@ -33,7 +34,7 @@ public class Russian_Doll_Envelopes_354 { /** accepted (speed: fast) **/
         int max_length = 0;
         int[] sub_array = new int[envelopes.length];
 
-        for (int[] num : envelopes) {
+        for (int[] num : envelopes) { // LIS now
 
             int index = Arrays.binarySearch(sub_array, 0, max_length, num[1]); // return the index of element or possible index at which the element would be inserted into an array (then it returns -k - 1)
 
@@ -52,7 +53,7 @@ public class Russian_Doll_Envelopes_354 { /** accepted (speed: fast) **/
 
     }
 
-    public static int LIS (int[] nums) {
+    public static int LIS (int[] nums) { /** LONGEST INCREASING SUBSEQUENCE **/
 
         int max_length = 0;
         int[] sub_array = new int[nums.length];
