@@ -68,6 +68,6 @@ public class Valid_Sudoku_36 {
             counter_of_points = 0;
         }
 
-        return flag;
+        return flag; // is Sudoku board valid?
     }
 }
