@@ -16,30 +16,30 @@ public class Meeting_Rooms_252 {
 
     public static boolean canAttendMeetings(int[][] intervals) {
 
-        if (intervals.length == 0) return true;
+        if (intervals.length == 0) return true; // dangerous case
 
         boolean flag = true;
 
         array = intervals;
 
-        recursiveBubble(intervals.length);
+        recursiveBubble(intervals.length); // sorting elements
 
         for (int i = 0; i < intervals.length - 1; i++) {
 
-            if (array[i][1] > array[i + 1][0]) {
+            if (array[i][1] > array[i + 1][0]) { // condition of intervals overlapping
                 flag = false;
-                break;
+                break; // if the flag is false now we can break from the cycle
             }
 
         }
 
-        return flag;
+        return flag; // the answer itself
     }
 
     public static void recursiveBubble (int length) { // recursiveBubble
 
-        if (length == 1) return;
-        int[] temp;
+        if (length == 1) return; // base case
+        int[] temp; // temporal variable
 
         for (int i = 0; i < length - 1; i++) {
             if (array[i][0] > array[i + 1][0]) { // changing elements
@@ -49,6 +49,6 @@ public class Meeting_Rooms_252 {
             }
         }
 
-        recursiveBubble(length - 1);
+        recursiveBubble(length - 1); // step of recursion
     }
 }
