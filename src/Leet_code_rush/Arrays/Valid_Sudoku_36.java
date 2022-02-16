@@ -17,11 +17,11 @@ public class Valid_Sudoku_36 {
                 ,{'.','.','.','4','1','9','.','.','5'}
                 ,{'.','.','.','.','8','.','.','7','9'}};
 
-        System.out.println("Is Sudoku Valid? The answer is " + isValidSudoku(board));
+        System.out.println("Is this Sudoku Valid? The answer is " + isValidSudoku(board));
 
     }
 
-    public static boolean isValidSudoku(char[][] board) {
+    public static boolean isValidSudoku(char[][] board) { // here we use remainder and quotient to make this task solution clear and fast
 
         boolean flag = true;
         char symbol;
