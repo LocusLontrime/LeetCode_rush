@@ -15,16 +15,13 @@ public class LeetCode_rush_4 { /** top-down accepted **/
         //print_2D_array(matrix);
 
         long start = System.nanoTime();
-
         System.out.println("Max square area = " + maximalSquare(matrix));
         System.out.println("Recursive counter = " + recursive_counter);
-
         long finish = System.nanoTime();
 
         System.out.println("Прошло времени в микросекундах : " + (finish - start) / 1000);
 
         //print_2D_array(matrix);
-
     }
 
     /**
