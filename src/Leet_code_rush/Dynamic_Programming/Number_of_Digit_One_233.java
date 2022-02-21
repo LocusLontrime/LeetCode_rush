@@ -1,4 +1,4 @@
-package Leet_code_rush.Recursion;
+package Leet_code_rush.Dynamic_Programming;
 
 import java.util.Arrays;
 
