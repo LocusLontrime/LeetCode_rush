@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Fibonacci {
 
     public static BigInteger [][] fibonacci_matrix = new BigInteger[][]{{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
-    public static ArrayList<Integer> list = new ArrayList<>();
 
     public static BigInteger[][] E_matrix = {{BigInteger.ONE, BigInteger.ZERO}, {BigInteger.ZERO, BigInteger.ONE}};
 
@@ -26,7 +25,7 @@ public class Fibonacci {
 
         long finish2 = System.nanoTime();
 
-        BigInteger[][] fib_recursive = matrix_pow_recursive(fibonacci_matrix, 10000000000L);
+        BigInteger[][] fib_recursive = matrix_pow_recursive(fibonacci_matrix, 10000000L);
 
         System.out.println(fib_recursive[0][1]);
 
@@ -64,24 +63,6 @@ public class Fibonacci {
 
     }
 
-    public static BigInteger[][] fib_matrix_pow (int N) {
-
-        find_powers_of_two(N);
-
-        BigInteger[][] final_matrix = {{BigInteger.ONE, BigInteger.ZERO}, {BigInteger.ZERO, BigInteger.ONE}};
-
-        BigInteger[][] temporal_matrix = fibonacci_matrix;
-
-        for (Integer i : list) {
-            for (int j = 0; j < i; j ++) temporal_matrix = multiply_two_rows_matrices(temporal_matrix, temporal_matrix);
-            final_matrix = multiply_two_rows_matrices(final_matrix, temporal_matrix);
-            temporal_matrix = fibonacci_matrix;
-        }
-
-        return final_matrix;
-
-    }
-
     public static BigInteger[][] matrix_pow_recursive (BigInteger[][] matrix, long N) {
 
         if (N == 0) return E_matrix;
@@ -91,7 +72,6 @@ public class Fibonacci {
         else return multiply_two_rows_matrices(matrix, matrix_pow_recursive(multiply_two_rows_matrices(matrix, matrix), (N - 1) / 2));
 
     }
-
 
     public static BigInteger[][] multiply_two_rows_matrices (BigInteger[][] a, BigInteger[][] b) {
 
@@ -105,50 +85,4 @@ public class Fibonacci {
         return multiplication;
 
     }
-
-    public static void find_powers_of_two (int N) {
-
-        list.clear();
-
-        int remain_part_of_N = N;
-
-        int power_of_two = find_max_power_of_two(N);
-        int value_of_power_of_two = (int) Math.pow(2,power_of_two);
-
-        list.add(power_of_two);
-        remain_part_of_N -= value_of_power_of_two;
-
-        while (power_of_two > 0) {
-
-            value_of_power_of_two /= 2;
-            power_of_two --;
-
-            if (remain_part_of_N >= value_of_power_of_two) {
-                remain_part_of_N -= value_of_power_of_two;
-                list.add(power_of_two);
-            }
-
-
-        }
-
-
-        System.out.println(list);
-
-    }
-
-    public static int find_max_power_of_two (int N) {
-
-        int i = 0;
-        int power_of_two = 1;
-
-        while (power_of_two <= N/2) {
-
-            power_of_two *= 2;
-            i++;
-
-        }
-
-        return i;
-    }
-
 }

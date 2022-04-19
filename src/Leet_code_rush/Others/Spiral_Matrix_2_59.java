@@ -10,7 +10,7 @@ public class Spiral_Matrix_2_59 {
 
         System.out.println(array[1][2]);
 
-        array = generateMatrix(15);
+        array = generateMatrix(9);
 
         //System.out.println(array[1][3]);
 

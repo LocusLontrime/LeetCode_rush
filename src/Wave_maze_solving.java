@@ -98,7 +98,6 @@ public class Wave_maze_solving { // it needs to change 0 to -1 and 1 to 0 in the
                         if (jP + 1 < maze[0].length && maze[iP][jP + 1] == 0) {
                             maze[iP][jP + 1] = wave_steps_counter;
                             new_front_wave.add(new Pair<Integer, Integer>(iP, jP + 1));
-
                         }
 
                         if (iP - 1 >= 0 && maze[iP - 1][jP] == 0) {

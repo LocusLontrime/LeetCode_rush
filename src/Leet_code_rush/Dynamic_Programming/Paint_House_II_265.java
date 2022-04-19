@@ -12,7 +12,6 @@ public class Paint_House_II_265 {
         System.out.println(minCostII(new int[][] {{1,5,3},{2,9,4}}));
 
         System.out.println(minCostII(new int[][] {{1,3},{2,4}}));
-
     }
 
     public static int minCostIIBottomUp(int[][] costs) { // we need to memorize only min and pre-min values from the previous row to
@@ -31,7 +30,6 @@ public class Paint_House_II_265 {
         }
 
         return 989;
-
     }
 
     public static int minCostII(int[][] costs) { /** accepted (speed: 3ms, fast) **/
@@ -50,37 +48,26 @@ public class Paint_House_II_265 {
         }
 
         return minCost;
-
     }
 
     public static int recursiveSeeker (int i, int colour) {
 
         if (i == 0) {
-
             return costsMatrix[i][colour];
-
         }
 
         int minCost = Integer.MAX_VALUE;
 
         if (memoTable[i][colour] == 0) {
-
             for (int j = 0; j < coloursQuantity; j++) {
-
                 if (j != colour) {
-
                     minCost = Math.min(minCost, recursiveSeeker(i - 1, j));
-
                 }
-
             }
 
             memoTable[i][colour] = minCost + costsMatrix[i][colour];
-
         }
 
         return memoTable[i][colour];
-
     }
-
 }

@@ -15,7 +15,7 @@ public class Remove_Boxes_546 {
         int[] array = new int[] {1,3,2,2,2,3,4,3,1};
         // array = new int[] {1,1,1};
         // array = new int[] {1};
-        array = new int[] {5,6,7,1,3,1,2,5,7,5};
+        array = new int[] {5,6,7,1,3,1,2,5,7,5,2,2,2,5,5,5,9};
 
         long finish1 = System.nanoTime();
 
@@ -30,6 +30,7 @@ public class Remove_Boxes_546 {
         System.out.println("t1 = " + (finish2 - finish1) / 1000 + " microsec");
 
         System.out.println("t2 = " + (finish3 - finish2) / 1000 + " microsec");
+
 
     }
 
