@@ -1,11 +1,8 @@
 package Code_wars_rush.Sudoku;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class DancingLinksAlgorithm {
+public class SudokuSolver { // DancingLinksAlgorithm -> accepted on codewars.com, incredibly fast
 
     private static final int BOARD_SIZE = 9;
     private static final int SUBSECTION_SIZE = 3;
@@ -15,8 +12,14 @@ public class DancingLinksAlgorithm {
     private static final int MAX_VALUE = 9;
     private static final int COVER_START_INDEX = 1;
 
+    private static int solutionsCounter;
+
+    private static int[][] solution;
+
+    private static int[][] grid;
+
     private static int[][] board = {
-            {5, 0, 0, 0, 0, 0, 0, 8, 0},
+            /* {5, 0, 0, 0, 0, 0, 0, 8, 0},
             {7, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 3, 0, 0, 0, 9},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -24,25 +27,164 @@ public class DancingLinksAlgorithm {
             {0, 0, 0, 0, 0, 2, 7, 5, 0},
             {0, 0, 0, 7, 0, 0, 2, 0, 0},
             {0, 3, 0, 0, 0, 0, 0, 0, 8},
-            {4, 9, 0, 0, 0, 0, 0, 0, 0}
+            {4, 9, 0, 0, 0, 0, 0, 0, 0} */
+
+            /* {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0} */
+
+
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8},
+            {1, 2, 3, 4, 5, 6, 7, 8}
     };
 
     public static void main(String[] args) {
 
         long start = System.nanoTime();
 
-        DancingLinksAlgorithm solver = new DancingLinksAlgorithm();
-        solver.solve(board);
+        SudokuSolver solver = new SudokuSolver(board);
+        solver.solve();
 
         long finish = System.nanoTime();
 
-        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000000 + " solCounter:");
+        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000 + " solCounter:");
     }
 
-    private void solve(int[][] board) {
-        boolean[][] cover = initializeExactCoverBoard(board);
+    public SudokuSolver(int[][] grid) {
+        SudokuSolver.grid = grid;
+    }
+
+    public int[][] solve() {
+
+        // invocation of IsBoardValid method
+        if (!isSudokuValid(grid)) {
+            throw new IllegalArgumentException();
+        }
+
+        solutionsCounter = 0;
+        solution = new int[grid.length][grid[0].length]; // ???
+
+        boolean[][] cover = initializeExactCoverBoard(grid);
         DancingLinks dlx = new DancingLinks(cover);
         dlx.runSolver();
+
+        if (solutionsCounter != 1) // solution uniqueness criteria
+        {
+            throw new IllegalArgumentException();
+        }
+
+        return solution;
+    }
+
+    public static boolean isSudokuValid(int[][] board) // general check on validity
+    {
+        if (board.length != BOARD_SIZE) return false; // if the board has incorrect size
+
+        for (int j = 0; j < BOARD_SIZE; j ++) {
+            if (board[j].length != BOARD_SIZE) return false;
+        }
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[j][i] != 0)
+                {
+                    if (board[j][i] < 1 || board[j][i] > 9) return false;
+                }
+            }
+        }
+
+        return isSudokuValidRepeats(board); // next validation method call
+    }
+
+    public static boolean isSudokuValidRepeats(int[][] board) // checks if there is any repeating numbers in row/column or square 3*3
+    {
+        int symbol;
+        int counter_of_points = 0;
+
+        HashSet<Integer> chars = new HashSet<Integer>(); // hash table for symbols
+
+        //Rows
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                symbol = board[i][j];
+                if (symbol != 0) chars.add(symbol);
+                else counter_of_points++;
+            }
+            if (chars.size() + counter_of_points != 9) return false;
+            chars.clear();
+            counter_of_points = 0;
+        }
+
+        //Columns
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                symbol = board[j][i];
+                if (symbol != 0) chars.add(symbol);
+                else counter_of_points++;
+            }
+            if (chars.size() + counter_of_points != 9) return false;
+            chars.clear();
+            counter_of_points = 0;
+        }
+
+        //Squares 3x3...
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                symbol = board[3 * (i / 3) + j / 3][3 * (i % 3) + j % 3];
+                if (symbol != 0) chars.add(symbol);
+                else counter_of_points++;
+            }
+            if (chars.size() + counter_of_points != 9) return false;
+            chars.clear();
+            counter_of_points = 0;
+        }
+
+        return true; // is Sudoku board valid?
+    }
+
+    public static void GetSol(int[][] solution, int[][] board)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                solution[j][i] = board[j][i];
+            }
+        }
+    }
+
+    public static void CopyBoardToSol(int[][] solution, int[][] board)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                solution[j][i] = board[j][i];
+            }
+        }
     }
 
     private int getIndex(int row, int column, int num) {
@@ -136,9 +278,11 @@ public class DancingLinksAlgorithm {
         private List<DancingNode> answer;
 
         private void search(int k) {
-            if (header.R == header) {
-                handleSolution(answer);
-            } else {
+            if (header.R == header) { // the answer if found -> the solutions counter should be implemented for validating
+                                      // no solution boards and multi-solutions cases
+                if (solutionsCounter == 0) handleSolution(answer);
+                solutionsCounter++;
+            } else if (solutionsCounter <= 1) {
                 ColumnNode c = selectColumnNodeHeuristic();
                 c.cover();
 
@@ -217,8 +361,10 @@ public class DancingLinksAlgorithm {
         }
 
         private void handleSolution(List<DancingNode> answer) {
-            int[][] result = parseBoard(answer);
-            printSolution(result);
+            // int[][] result = parseBoard(answer);
+            // printSolution(result); // if we wanna print the sol during the runtime
+            solution = parseBoard(answer);
+            // printSolution(solution);
         }
 
         private int size = 9;

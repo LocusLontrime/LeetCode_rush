@@ -1,6 +1,6 @@
 package Leet_code_rush.Dynamic_Programming;
 
-public class LeetCode_rush_8 { /** accepted **/
+public class LeetCode_rush_8 { /** accepted on both of (leetcode.com/codwars.com) **/
 
     static int[] coins; //coins array
     static int amount;
@@ -13,7 +13,7 @@ public class LeetCode_rush_8 { /** accepted **/
         int[] coins = {411,412,413,414,415,416,417,418,419,420,421,422}; //{1}; //{2}; //{1, 2, 5};
         int amount = 9864; //0; //3; //11;
 
-        long start = System.nanoTime();
+        long start = System.nanoTime(); // 366
 
         System.out.println(coinChange(coins, amount));
 
@@ -21,7 +21,6 @@ public class LeetCode_rush_8 { /** accepted **/
 
         System.out.println("Прошло времени в микросекундах : " + (finish - start) / 1000); //366 98
         System.out.println();
-
     }
 
     /**
@@ -107,5 +106,4 @@ public class LeetCode_rush_8 { /** accepted **/
         }
 
     }
-
 }

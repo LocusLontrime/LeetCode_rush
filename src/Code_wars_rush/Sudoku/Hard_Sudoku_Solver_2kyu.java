@@ -1,10 +1,8 @@
-package Code_wars_rush;
+package Code_wars_rush.Sudoku;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.HashSet;
 
-public class Hard_Sudoku_Solver_2kyu {
+public class Hard_Sudoku_Solver_2kyu { // not accepted coz of runtime
 
     public Hard_Sudoku_Solver_2kyu(int[][] grid) { // for a codewars.com test
         board = grid;

@@ -34,7 +34,6 @@ public class Triangle_120 {
 
         System.out.println("t1 (top-down, recursive, O(rows^2) memory) = " + (finish1 - start) / 1000 + " microsec");
         System.out.println("t2 (bottom-up, O(rows) memory) = " + (finish2 - finish1) / 1000 + " microsec");
-
     }
 
     public static int minimumTotalLessMemory (List<List<Integer>> triangle) { /** accepted (speed: not so fast as it works, leetcode.com defines runtime in a
@@ -51,9 +50,7 @@ public class Triangle_120 {
                 if (i != 0 && i != j) currentMinPathSumsArray[i] = Math.min(prevMinPathSumsArray[i], prevMinPathSumsArray[i - 1]) + triangle.get(j).get(i);
                 else if (i == 0) currentMinPathSumsArray[i] = prevMinPathSumsArray[i] + triangle.get(j).get(i);
                 else  currentMinPathSumsArray[i] = prevMinPathSumsArray[i - 1] + triangle.get(j).get(i);
-
             }
-
 
             prevMinPathSumsArray = currentMinPathSumsArray;
         }
@@ -63,7 +60,6 @@ public class Triangle_120 {
         }
 
         return minPathSum;
-
     }
 
     public static int minimumTotal(List<List<Integer>> triangle) { /** accepted (speed: 1ms, very fast) but requires O(rows^2) time **/
@@ -77,9 +73,7 @@ public class Triangle_120 {
         int minPathSum = Integer.MAX_VALUE;
 
         for (int i = 0; i < triangleRows; i++) {
-
             minPathSum = Math.min(minPathSum, recursiveSeeker(triangleRows - 1, i));
-
         }
 
         return minPathSum;
@@ -108,7 +102,5 @@ public class Triangle_120 {
         }
 
         return memoTable[row][elementIndex];
-
     }
-
 }

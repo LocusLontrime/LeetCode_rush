@@ -80,7 +80,6 @@ public class Q_sort_ints {
             if (i < j) {
                 ints_permutation(i ++ , j --);
             } else return j; // returning j value if two pointer has met, this value will be counted as a pivot value for the next recursion step of the q_sort
-
         }
     }
 
