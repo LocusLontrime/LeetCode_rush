@@ -2,7 +2,7 @@ package Code_wars_rush.Sudoku;
 
 import java.util.*;
 
-public class SudokuSolver { // DancingLinksAlgorithm -> accepted on codewars.com, incredibly fast
+public class SudokuSolver { /** DancingLinksAlgorithm -> accepted on codewars.com, incredibly fast **/
 
     private static final int BOARD_SIZE = 9;
     private static final int SUBSECTION_SIZE = 3;

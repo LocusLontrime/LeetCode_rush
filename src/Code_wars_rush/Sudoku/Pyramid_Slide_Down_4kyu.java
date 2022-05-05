@@ -3,7 +3,7 @@ package Code_wars_rush.Sudoku;
 import java.util.Arrays;
 import java.util.List;
 
-public class Pyramid_Slide_Down_4kyu {
+public class Pyramid_Slide_Down_4kyu { /** accepted on codewars.com **/
 
     static int[][] numbers;
     static int[][] memoTable;
