@@ -1,137 +1,178 @@
 package Code_wars_rush;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
-public class Find_the_cheapest_path_3kyu {
+public class Find_the_cheapest_path_3kyu { /** accepted on codewars.com **/
+    // Java program to get the least cost path in a grid from top-left to bottom-right
+    static int[] dx = { -1, 0, 1, 0 };
+    static int[] dy = { 0, 1, 0, -1 };
 
-    public static int jMax, iMax;
+    static String[] dirs = {"up", "right", "down", "left"};
+    static int ROW;
+    static int COL;
 
-    public static int[][] memoTable;
+    // Driver code
+    public static void main(String[] args) throws IOException {
 
-    public static ArrayList<String> finalSeq;
-
-    public static Point finishPoint;
-
-    public static int[][] directions = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-
-    public static void main(String[] args) {
-
-        int[][] matrix = new int[][]
-        {
-            { 1, 9, 1},
-            { 2, 9, 1},
-            { 2, 1, 1}
+        int[][] grid = {/*
+                {1, 9, 1},
+                {2, 9, 1},
+                {2, 1, 1} */
+                {9, 1, 1, 1, 7, 8, 9, 3, 6},
+                {5, 1, 7, 6, 6, 5, 4, 9, 9},
+                {9, 1, 1, 1, 1, 3, 5, 5, 9},
+                {9, 9, 9, 9, 1, 6, 9, 9, 5},
+                {6, 6, 1, 1, 1, 7, 9, 1, 9},
+                {5, 3, 1, 9, 9, 6, 8, 1, 7},
+                {7, 7, 1, 7, 9, 6, 7, 1, 6},
+                {8, 7, 1, 1, 1, 1, 1, 1, 8},
+                {9, 9, 7, 3, 6, 4, 3, 6, 9}
         };
 
-        // matrix = new int[][] {{1,1,1},{1,1,1},{1,1,1}};
+        // grid = GetRandomGrid(100);
 
-        // ArrayList<String> list = CheapestPath(matrix, new Point(0, 0), new Point(0, 2));
-        // ArrayList<String> list = CheapestPath(matrix, new Point(1, 1), new Point(1, 1));
+        long start = System.nanoTime();
 
-        /* for (String s : list) {
-            System.out.println(s);
-        } */
+        System.out.println(cheapestPath(grid, new Point (0, 1), new Point(4, 7)));
 
-        iMax = 3;
-        jMax = 3;
+        long finish = System.nanoTime();
 
-        System.out.println(RecSeekerDP(0, 2, 4, new ArrayList<String>(), matrix, new Point(0, 0)));
+        System.out.println("Прошло времени в микросекундах : " + (finish - start) / 1000);
     }
 
-    public static ArrayList<String> CheapestPath(int[][] matrix, Point start, Point finish)
-    {
-        jMax = matrix.length;
-        iMax = matrix[0].length;
+    static class Cell { // class for cell's row- and column-indexes and distance representation
+        int x, y; // coords
+        int distance;
+        Cell(int x, int y, int distance) {
 
-        memoTable = new int[jMax][iMax];
-        MemoFill();
+            this.x = x;
+            this.y = y;
 
-        finishPoint = finish;
-
-        RecSeeker(start.x, start.y, new ArrayList<String>(), matrix, 0);
-
-        return finalSeq;
+            this.distance = distance;
+        }
     }
 
-    public static ArrayList<String> CheapestPathDP(int[][] matrix, Point start, Point finish)
+    static class distanceComparator implements Comparator<Cell> // Spec comparator, using for adding cells into PQ (prior. queue)
     {
-        jMax = matrix.length;
-        iMax = matrix[0].length;
-
-        memoTable = new int[jMax][iMax]; // initialization with nulls
-
-        finishPoint = finish;
-
-        RecSeeker(start.x, start.y, new ArrayList<String>(), matrix, 0);
-
-        return finalSeq;
-    }
-
-    public static int RecSeekerDP(int j, int i, int prevDir, ArrayList<String> currWay, int[][] matrix, Point p)
-    {
-        if (j == p.x && i == p.y)
+        public int compare(Cell a, Cell b)
         {
-            return 0;
+            if (a.distance < b.distance) return -1;
+            else if (a.distance > b.distance) return 1;
+            else return 0;
+        }
+    }
+    static boolean isInsideGrid(int i, int j) // Auxiliary method for checking if the current cell located inside the grid given or not
+    {
+        return (i >= 0 && i < ROW && j >= 0 && j < COL);
+    }
+
+    static ArrayList<String> cheapestPath(int[][] grid, Point start, Point finish)  // Method returning the shortest path from the start Point
+                                                                                    // to the final one in 2D grid
+    {
+        if (start.x == finish.x && start.y == finish.y) {
+            return new ArrayList<String>();
         }
 
-        int currMinPrice = Integer.MAX_VALUE;
+        ROW = grid.length;
+        COL = grid[0].length;
 
-        if (j >= 0 && i >= 0 && j < jMax && i < iMax)
-        {
+        int[][] distance = new int[ROW][COL];
+        StringBuilder[][] paths = new StringBuilder[ROW][COL];
 
-            for (int dir = 0; dir < directions.length; dir++) {
-                if (dir != prevDir && j + directions[dir][0] >= 0 && i + directions[dir][1] >= 0 && j + directions[dir][0] < jMax && i + directions[dir][1] < iMax) {
+        // Initializing distance array by INT_MAX
 
-                    currMinPrice = Math.min(currMinPrice, RecSeekerDP(j + directions[dir][0], i + directions[dir][1], dir, currWay, matrix, p) +
-                            matrix[j + directions[dir][0]][i + directions[dir][1]]);
+        for (int i = 0; i < ROW; i++) {
+
+            for (int j = 0; j < COL; j++) {
+
+                distance[i][j] = 1000000000;
+
+                paths[i][j] = new StringBuilder("");
+            }
+        }
+
+        // Initialized source distance as
+
+        // initial grid position value
+
+        distance[start.x][start.y] = 0;
+
+        PriorityQueue<Cell> pq = new PriorityQueue<Cell>(ROW * COL, new distanceComparator());
+
+        // Insert source cell to priority queue
+
+        pq.add(new Cell(start.x, start.y, distance[start.x][start.y]));
+
+        while (!pq.isEmpty()) {
+
+            Cell curr = pq.poll();
+
+            for(int i = 0; i < 4; i++) {
+
+                String dir = dirs[i];
+
+                int rows = curr.x + dx[i];
+                int cols = curr.y + dy[i];
+
+                if (isInsideGrid(rows, cols)) {
+
+                    if (distance[rows][cols] >
+                            distance[curr.x][curr.y] +
+                                    grid[curr.x][curr.y]) {
+
+                        // If Cell is already been reached once,
+
+                        // remove it from priority queue
+
+                        if (distance[rows][cols] != 1000000000) {
+
+                            Cell adj = new Cell(rows, cols, distance[rows][cols]);
+
+                            pq.remove(adj);
+                        }
+
+                        // Insert cell with updated distance
+
+                        distance[rows][cols] = distance[curr.x][curr.y] + grid[curr.x][curr.y];
+
+                        paths[rows][cols] = new StringBuilder("").append(paths[curr.x][curr.y]).append(dir).append(" ");
+
+                        pq.add(new Cell(rows, cols, distance[rows][cols]));
+                    }
                 }
             }
-
         }
 
-        return currMinPrice;
+        System.out.println(distance[finish.x][finish.y]); // min cost check
+
+        StringBuilder result = paths[finish.x][finish.y];
+        result.delete(result.length() - 1, result.length());
+
+        System.out.println(result); // dirs string check
+
+        String[] pathDirs = result.toString().split(" ");
+
+        return new ArrayList<String>(Arrays.asList(pathDirs));
     }
 
-    public static void RecSeeker(int j, int i, ArrayList<String> currWay, int[][] matrix, int currentPrice)
-    {
-        if (j >= 0 && i >= 0 && j < jMax && i < iMax)
-        {
-            if (memoTable[j][i] > currentPrice)
-            {
-                memoTable[j][i] = currentPrice;
+    public static int[][] GetRandomGrid(int N) {
 
-                if (finishPoint.x == j && finishPoint.y == i) finalSeq = new ArrayList<String>(currWay);
+        Random random = new Random();
 
-                ArrayList<String> newCurrWay;
+        int[][] grid = new int[N][N];
 
-                newCurrWay = new ArrayList<String>(currWay);
-                newCurrWay.add("down");
-                RecSeeker(j + 1, i, newCurrWay, matrix, currentPrice + matrix[j][i]);
+        for (int j = 0; j < N; j++) {
 
-                newCurrWay = new ArrayList<String>(currWay);
-                newCurrWay.add("right");
-                RecSeeker(j, i + 1, newCurrWay, matrix, currentPrice + matrix[j][i]);
+            for (int i = 0; i < N; i++) {
 
-                newCurrWay = new ArrayList<String>(currWay);
-                newCurrWay.add("up");
-                RecSeeker(j - 1, i, newCurrWay, matrix, currentPrice + matrix[j][i]);
+                grid[j][i] = random.nextInt(N * N);
 
-                newCurrWay = new ArrayList<String>(currWay);
-                newCurrWay.add("left");
-                RecSeeker(j, i - 1, newCurrWay, matrix, currentPrice + matrix[j][i]);
             }
         }
-    }
 
-    public static void MemoFill()
-    {
-        for (int j = 0; j < jMax; j++)
-        {
-            for (int i = 0; i < iMax; i++)
-            {
-                memoTable[j][i] = Integer.MAX_VALUE;
-            }
-        }
+        return grid;
     }
 }
+
