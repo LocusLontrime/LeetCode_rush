@@ -25,7 +25,7 @@ public class Fibonacci {
 
         long finish2 = System.nanoTime();
 
-        BigInteger[][] fib_recursive = matrix_pow_recursive(fibonacci_matrix, 10000000L);
+        BigInteger[][] fib_recursive = matrix_pow_recursive(fibonacci_matrix, 1000000);
 
         System.out.println(fib_recursive[0][1]);
 
@@ -60,7 +60,6 @@ public class Fibonacci {
         }
 
         return f2;
-
     }
 
     public static BigInteger[][] matrix_pow_recursive (BigInteger[][] matrix, long N) {
@@ -70,7 +69,6 @@ public class Fibonacci {
 
         if (N % 2 == 0) return matrix_pow_recursive(multiply_two_rows_matrices(matrix, matrix), N / 2);
         else return multiply_two_rows_matrices(matrix, matrix_pow_recursive(multiply_two_rows_matrices(matrix, matrix), (N - 1) / 2));
-
     }
 
     public static BigInteger[][] multiply_two_rows_matrices (BigInteger[][] a, BigInteger[][] b) {
