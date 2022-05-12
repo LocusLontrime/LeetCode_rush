@@ -16,7 +16,7 @@ public class Integer_Square_Root_2kyu { // accepted on codewars.com
 
         // A.multiply(B).printBigInteger();
 
-        BigInteger N = new BigInteger("23232328323215435345345345343458098856756556809400840980980980980809092343243243243243098799634");
+        BigInteger N = new BigInteger("2323232832321543534534534534345809885675655680940084098098098098080909234324324324324309879963");
 
         BigInteger sqrt = N.sqrt();
 
