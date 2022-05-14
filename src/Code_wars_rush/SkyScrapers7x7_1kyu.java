@@ -2,7 +2,7 @@ package Code_wars_rush;
 
 import java.util.*;
 
-public class SkyScrapers7x7 {
+public class SkyScrapers7x7_1kyu { // TODO MedVed test case goes wrong
 
     private static final int SIZE = 7; // the size of skyscrapers grid
 
@@ -41,7 +41,7 @@ public class SkyScrapers7x7 {
 
     private static void ckeckSolution() { // test case
 
-        assertEquals(SkyScrapers7x7.solvePuzzle(clues), expectedSol);
+        assertEquals(SkyScrapers7x7_1kyu.solvePuzzle(clues), expectedSol);
 
     }
 
