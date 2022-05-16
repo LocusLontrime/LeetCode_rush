@@ -3,7 +3,7 @@ package Code_wars_rush;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Integer_Square_Root_2kyu { // accepted on codewars.com
+public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted on codewars.com, 4kyu factorial version too
 
     public static int recCounter;
 
@@ -21,6 +21,8 @@ public class Integer_Square_Root_2kyu { // accepted on codewars.com
         BigInteger sqrt = N.sqrt();
 
         System.out.print("Sqrt of " + N + " = " + sqrt);
+
+        // System.out.println("factorial = " + BigInteger.factorial(10000));
 
         long finish = System.nanoTime();
 
@@ -55,6 +57,18 @@ public class Integer_Square_Root_2kyu { // accepted on codewars.com
             {
                 this.number[i] = Character.getNumericValue(number.charAt(i));
             }
+        }
+
+        public static BigInteger factorial (int n)
+        {
+            BigInteger res = BigInteger.ONE;
+
+            for (int i = 1; i <= n; i++)
+            {
+                res = res.multiply(new BigInteger(new int[]{i}));
+            }
+
+            return res;
         }
 
         public BigInteger sqrt() throws Exception {
@@ -207,7 +221,7 @@ public class Integer_Square_Root_2kyu { // accepted on codewars.com
             BigInteger left, right;
 
             left = new BigInteger(this.number);
-            right = new BigInteger(num.number);
+            right = new BigInteger(num.number); // should be less than left to decrease the runtime of executing
 
             while (right.compareTo(ZERO) != 0) {
 
