@@ -1,6 +1,5 @@
 package Code_wars_rush;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted on codewars.com, 4kyu factorial version too
@@ -16,20 +15,24 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
         // A.multiply(B).printBigInteger();
 
-        BigInteger N = new BigInteger("2323232832321543534534534534345809885675655680940084098098098098080909234324324324324309879963");
+        // BigInteger N = new BigInteger("2323232832321543534534534534345809885675655680940084098098098098080909234324324324324309879963");
 
-        BigInteger sqrt = N.sqrt();
+        // BigInteger sqrt = N.sqrt();
 
-        System.out.print("Sqrt of " + N + " = " + sqrt);
+        // System.out.print("Sqrt of " + N + " = " + sqrt);
 
-        // System.out.println("factorial = " + BigInteger.factorial(10000));
+        System.out.println("factorial = " + BigInteger.factorial(10000));
 
         long finish = System.nanoTime();
+
+        java.math.BigInteger big;
 
         System.out.println("\nПрошло времени в микросекундах : " + (finish - start) / 1000);
     }
 
     public static class BigInteger {
+
+        public static final int KARATSUBA_THRESHOLD = 80; // needs to be tested a bit
 
         public static BigInteger ZERO = new BigInteger(new int[] { 0 });
 
@@ -65,7 +68,7 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
             for (int i = 1; i <= n; i++)
             {
-                res = res.multiply(new BigInteger(new int[]{i}));
+                res = res.multiply(new BigInteger(new int[]{i})); // long num multiplied by short one
             }
 
             return res;
@@ -153,7 +156,6 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
                 rightArray[0] = 3;
                 rightArray[1] = 2;
-
             }
 
             leftB = new BigInteger(leftArray);
@@ -240,6 +242,12 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
             multiplication.removeLeadingZero();
 
             return multiplication;
+        }
+
+        public BigInteger multiply_Karatsuba(BigInteger num) // is it needed???
+        {
+
+            return BigInteger.ZERO;
         }
 
         public boolean isDivisibleByTwo () {
