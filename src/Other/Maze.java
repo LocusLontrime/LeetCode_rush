@@ -1,3 +1,5 @@
+package Other;
+
 public class Maze {
 
     final static int x_max = 5;

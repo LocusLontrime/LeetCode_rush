@@ -1,26 +1,26 @@
-public class The_Dog_2 {
-    public static void main(String[] args) { // concept with dog reaction timing
+package Other;
+
+public class The_Dog {
+    public static void main(String[] args) { // concept with minimal distance (dog_length) between A and B
+
         double count = 0;
         double va = 1, vb = 2, v = 5;
-        double length = 1000, dog_length = 10, minimal_turning_back_time = 1.0d; // the time of turning back
+        double length = 1000, dog_length = 10;
 
-        int xA, xB; // just for convenience, not for coding
+        int xA, xB;
 
         double xa = 0, xb = length;
 
-        while (xb - xa > dog_length) { // algorithm from dog_1 class needs some improvement
+        while (xb - xa > dog_length) {
 
             if (count % 2 == 0) {
                 xb -= vb * (xb - xa)/(v + vb);
-                xb -= vb * minimal_turning_back_time;
                 xa += va * (xb - xa)/(v + vb);
-                xa += vb * minimal_turning_back_time;
             }
+
             else {
                 xa += va * (xb - xa)/(v + va);
-                xa += vb * minimal_turning_back_time;
                 xb -= vb * (xb - xa)/(v + va);
-                xb -= vb * minimal_turning_back_time;
             }
 
             xA = (int) xa;
@@ -32,6 +32,5 @@ public class The_Dog_2 {
         }
 
         System.out.println("Counter equals " + count);
-
     }
 }

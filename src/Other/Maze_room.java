@@ -1,3 +1,5 @@
+package Other;
+
 public class Maze_room {
 
     boolean top; // is there a wall at the top of the room? true=yes, false = no

@@ -1,3 +1,5 @@
+package Other;
+
 public class Factorial_rec_and_simple {
 
     public static void main(String[] args) {

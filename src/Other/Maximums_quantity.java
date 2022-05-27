@@ -1,3 +1,5 @@
+package Other;
+
 public class Maximums_quantity {
 
     static int[] numbers = {1, 8, 3, 8, 2, 6, 8, 8, 7, 8, 8, 8, 8};

@@ -1,3 +1,5 @@
+package Other;
+
 public class Translation {
 
     public static void main(String[] args) {

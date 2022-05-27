@@ -1,3 +1,5 @@
+package Other;
+
 public class Homework2 {
 
     static int [] array;

@@ -21,7 +21,7 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
         // System.out.print("Sqrt of " + N + " = " + sqrt);
 
-        System.out.println("factorial = " + BigInteger.factorial(10000));
+        System.out.println("factorial = " + BigInteger.factorial(1000));
 
         long finish = System.nanoTime();
 

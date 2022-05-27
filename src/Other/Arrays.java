@@ -1,3 +1,5 @@
+package Other;
+
 import Leet_code_rush.Sorts.Q_sort_ints;
 
 public class Arrays
