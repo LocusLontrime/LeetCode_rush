@@ -1,4 +1,4 @@
-package Other;
+package Path_finding;
 
 import javafx.util.Pair;
 import java.util.ArrayList;
