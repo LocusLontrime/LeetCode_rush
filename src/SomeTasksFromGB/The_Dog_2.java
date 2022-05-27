@@ -1,4 +1,4 @@
-package Other;
+package SomeTasksFromGB;
 
 public class The_Dog_2 {
     public static void main(String[] args) { // concept with dog reaction timing

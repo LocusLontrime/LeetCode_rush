@@ -1,4 +1,4 @@
-package Other;
+package SomeTasksFromGB;
 
 public class Homework2 {
 

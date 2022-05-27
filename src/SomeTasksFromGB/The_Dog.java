@@ -1,4 +1,4 @@
-package Other;
+package SomeTasksFromGB;
 
 public class The_Dog {
     public static void main(String[] args) { // concept with minimal distance (dog_length) between A and B

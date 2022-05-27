@@ -1,4 +1,4 @@
-package Other;
+package SomeTasksFromGB;
 
 import Leet_code_rush.Sorts.Q_sort_ints;
 

@@ -1,4 +1,4 @@
-package Other;
+package SomeTasksFromGB;
 
 public class Maximums_quantity {
 

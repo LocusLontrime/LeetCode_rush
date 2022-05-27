@@ -1,4 +1,6 @@
-package Other;
+package SomeTasksFromGB;
+
+import Other.Vector_of_movement;
 
 public class Maze {
 
