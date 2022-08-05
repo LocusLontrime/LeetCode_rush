@@ -19,7 +19,7 @@ public class SudokuSolver { /** DancingLinksAlgorithm -> accepted on codewars.co
     private static int[][] grid;
 
     private static int[][] board = {
-            /* {5, 0, 0, 0, 0, 0, 0, 8, 0},
+            {5, 0, 0, 0, 0, 0, 0, 8, 0},
             {7, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 3, 0, 0, 0, 9},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -27,7 +27,7 @@ public class SudokuSolver { /** DancingLinksAlgorithm -> accepted on codewars.co
             {0, 0, 0, 0, 0, 2, 7, 5, 0},
             {0, 0, 0, 7, 0, 0, 2, 0, 0},
             {0, 3, 0, 0, 0, 0, 0, 0, 8},
-            {4, 9, 0, 0, 0, 0, 0, 0, 0} */
+            {4, 9, 0, 0, 0, 0, 0, 0, 0}
 
             /* {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -40,14 +40,14 @@ public class SudokuSolver { /** DancingLinksAlgorithm -> accepted on codewars.co
             {0, 0, 0, 0, 0, 0, 0, 0, 0} */
 
 
+            /* {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
             {1, 2, 3, 4, 5, 6, 7, 8},
-            {1, 2, 3, 4, 5, 6, 7, 8},
-            {1, 2, 3, 4, 5, 6, 7, 8}
+            {1, 2, 3, 4, 5, 6, 7, 8} */
     };
 
     public static void main(String[] args) {
@@ -55,11 +55,18 @@ public class SudokuSolver { /** DancingLinksAlgorithm -> accepted on codewars.co
         long start = System.nanoTime();
 
         SudokuSolver solver = new SudokuSolver(board);
-        solver.solve();
+        int[][] array = solver.solve();
 
         long finish = System.nanoTime();
 
-        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000 + " solCounter:");
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000000 + " ms");
     }
 
     public SudokuSolver(int[][] grid) {

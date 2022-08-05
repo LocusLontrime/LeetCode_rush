@@ -15,13 +15,13 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
         // A.multiply(B).printBigInteger();
 
-        // BigInteger N = new BigInteger("2323232832321543534534534534345809885675655680940084098098098098080909234324324324324309879963");
+        BigInteger N = new BigInteger("2323232832321543534534534534345809885675655680940084098098098098080909234324324324324309879963");
 
-        // BigInteger sqrt = N.sqrt();
+        BigInteger sqrt = N.sqrt();
 
-        // System.out.print("Sqrt of " + N + " = " + sqrt);
+        System.out.print("Sqrt of " + N + " = " + sqrt);
 
-        System.out.println("factorial = " + BigInteger.factorial(1000));
+//        System.out.println("factorial = " + BigInteger.factorial(1000));
 
         long finish = System.nanoTime();
 

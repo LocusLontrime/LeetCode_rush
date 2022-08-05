@@ -19,7 +19,9 @@ public class Last_digits_of_automorph_n_4kyu {
 
         // System.out.println(hensels_lemma(base, digits));
 
-        System.out.println(get(30000));
+//        System.out.println(get(30000));
+        System.out.println(get(10));
+        System.out.println(get(130));
 
         long finish = System.nanoTime();
 

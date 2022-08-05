@@ -138,7 +138,7 @@ public class Hard_Sudoku_Solver_2kyu { // not accepted coz of runtime
 
         long start = System.nanoTime();
 
-        SolveSudoku(board9); // the main method call
+        SolveSudoku(board3); // the main method call
 
         long finish = System.nanoTime();
 

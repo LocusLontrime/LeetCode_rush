@@ -47,9 +47,7 @@ public class Differentiate_a_polynomial_4kyu { // accepted on codewars.com
         public Polynomial(String s) // -5x^2+10x+4678
         {
             int power = GetMaxPowerFromString(s);
-
             polynomial = new long[power + 1];
-
             int j = 0; // walking dead index
 
             while (true) {
@@ -78,7 +76,6 @@ public class Differentiate_a_polynomial_4kyu { // accepted on codewars.com
                 }
 
                 if (num == 0) num = 1;
-
                 if (isNeg) num *= -1;
 
                 if (s.charAt(j) == 'x')
@@ -104,7 +101,6 @@ public class Differentiate_a_polynomial_4kyu { // accepted on codewars.com
                 this.polynomial[(int) power] = num;
 
                 if (j == s.length() - 1 && digits.contains(Character.getNumericValue(s.charAt(j)))) break;
-
                 if (j < s.length() && s.charAt(j) == '+') j++;
             }
         }
@@ -189,5 +185,4 @@ public class Differentiate_a_polynomial_4kyu { // accepted on codewars.com
             return zeroP;
         }
     }
-
 }

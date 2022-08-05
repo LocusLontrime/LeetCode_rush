@@ -1,5 +1,10 @@
 package Leet_code_rush.Dynamic_Programming;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
+
 public class Digit_Count_in_Range_1067 {
 
     static int N;
@@ -8,12 +13,26 @@ public class Digit_Count_in_Range_1067 {
 
     public static void main(String[] args) {
 
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//
+//        try {
+//
+//            String s = reader.readLine();
+//
+//            printStackTrace(s);
+//
+//        } catch(Exception e) {
+//
+//            System.out.println(printStackTrace(e));
+//
+//        }
+
         //System.out.println(digitsCount(3, 100, 250));
         //System.out.println(digitsCount(1, 1, 13));
         //System.out.println(digitsCount(2, 1, 20));
         //System.out.println(digitsCount(0, 625, 1250));
         //System.out.println(digitsCount(0, 1, 958)); // 185
-        System.out.println(digitsCount(0, 1, 9980055)); // 5881017
+        System.out.println(digitsCount(5, 1, 123456789)); // 5881017
 
         // System.out.println(digitsCount(0, 1, 100)); // 11
         System.out.println("Counter = " + counter);

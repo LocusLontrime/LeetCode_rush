@@ -109,5 +109,4 @@ public class How_many_are_smaller_than_me_another_way_3kyu { // accepted on code
 
         return result;
     }
-
 }
