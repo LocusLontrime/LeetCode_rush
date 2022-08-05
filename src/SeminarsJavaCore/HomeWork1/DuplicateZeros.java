@@ -12,19 +12,19 @@ public class DuplicateZeros {
 
     public static void duplicateZeros(int[] arr) {
 
-        int length = arr.length - 1; // last index
+        int lastIndex = arr.length - 1; // last index
         int lastDupIndex = -1; // last duplicated one index
 
         // cycling all over the values of initial array (arr)
-        for (int i = 0; i <= length; i++) {
+        for (int i = 0; i <= lastIndex; i++) {
             lastDupIndex += arr[i] == 0 ? 2 : 1;
 
-            if (lastDupIndex == length) { // here the last item (duplicated or not) been added completely
+            if (lastDupIndex == lastIndex) { // here the last item (duplicated or not) been added completely
                 lastDupIndex = i;
                 break;
-            } else if (lastDupIndex > length) { // here the last item was a zero and its duplicate is out of bounds of arr
-                arr[length] = 0; // just a one zero to the end of initial array
-                length--;
+            } else if (lastDupIndex > lastIndex) { // here the last item was a zero and its duplicate is out of bounds of arr
+                arr[lastIndex] = 0; // just a one zero to the end of initial array
+                lastIndex--;
                 lastDupIndex = i - 1;
                 break;
             }
@@ -33,10 +33,10 @@ public class DuplicateZeros {
         for (int i = lastDupIndex; i >= 0 ; i--) {
 
             if (arr[i] == 0) {
-                arr[length--] = 0;
-                arr[length--] = 0;
+                arr[lastIndex--] = 0;
+                arr[lastIndex--] = 0;
             } else {
-                arr[length--] = arr[i];
+                arr[lastIndex--] = arr[i];
             }
         }
 
