@@ -2,27 +2,27 @@ package SeminarsJavaCore.HomeWork2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Combinations {
+public class CombinationsWithRepeats {
     public static List<List<Integer>> combs;
 
     public static void main(String[] args) {
-        combine(5, 3);
+        combineWithRepeats(5, 3);
         printCombs();
     }
 
-    public static List<List<Integer>> combine (int n, int k) {
+    public static List<List<Integer>> combineWithRepeats (int n, int k) {
         combs = new ArrayList<List<Integer>>();
-        recursiveSeeker(new ArrayList<Integer>(), n, k, 1);
+        recursiveSeekerRepeats(new ArrayList<Integer>(), n, k, 1);
         return combs;
     }
 
-    public static void recursiveSeeker(ArrayList<Integer> currComb, int n, int k, int prevElem) {
+    public static void recursiveSeekerRepeats(ArrayList<Integer> currComb, int n, int k, int prevElem) {
         if (currComb.size() == k) combs.add(new ArrayList<Integer>(currComb));
 
-        for (Integer i = prevElem; i <= n; ++i) {
+        else for (Integer i = prevElem; i <= n; i++) {
             ArrayList<Integer> newCombs = new ArrayList<Integer>(currComb);
             newCombs.add(i);
-            recursiveSeeker(newCombs, n, k, i + 1);
+            recursiveSeekerRepeats(newCombs, n, k, i);
         }
     }
 
