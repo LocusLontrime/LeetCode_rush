@@ -4,11 +4,12 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 public class nQueens {
 
     public static int N;
-    public static HashSet<HashSet<Pair<Integer, Integer>>> set = new HashSet<HashSet<Pair<Integer, Integer>>>();
+    public static Set<Set<Pair<Integer, Integer>>> set = new HashSet<>();
 
     public static void main(String[] args) {
 
@@ -17,7 +18,7 @@ public class nQueens {
         System.out.println("All placements Queens coordinates:\n");
 
         int counter = 1;
-        for (HashSet<Pair<Integer, Integer>> set : set)
+        for (Set<Pair<Integer, Integer>> set : set)
         {
             System.out.print("Partition number " + counter++ + ": ");
             for (Pair<Integer, Integer> pair: set) System.out.print("(" + pair.getKey() + "," + pair.getValue() + ") ");
@@ -38,7 +39,7 @@ public class nQueens {
     // the placements queens coordinates
     {
         if (row == N) {
-            HashSet<Pair<Integer, Integer>> currSet = new HashSet<Pair<Integer, Integer>>();
+            Set<Pair<Integer, Integer>> currSet = new HashSet<Pair<Integer, Integer>>();
 
             int currRow = 0;
             for (int i : verticalSet) currSet.add(new Pair<Integer, Integer>(currRow++, i));

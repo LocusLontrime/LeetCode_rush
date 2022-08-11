@@ -2,19 +2,20 @@ package Path_finding;
 
 import javafx.util.Pair;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Wave_maze_solving { // it needs to change 0 to -1 and 1 to 0 in the maze array
 
-    final static int i_max = 10; //1;
-    final static int j_max = 10;
+    final static int iMax = 10; //1;
+    final static int jMax = 10;
 
-    final static int i_start = 3; //0; // starting point coordinates (A point)
-    final static int j_start = 7; //0;
+    final static int iStart = 3; //0; // starting point coordinates (A point)
+    final static int jStart = 7; //0;
 
-    final static int i_end = 9; //0; // ending point coordinates (B point)
-    final static int j_end = 4; //9;
+    final static int iEnd = 9; //0; // ending point coordinates (B point)
+    final static int jEnd = 4; //9;
 
-    static int [][] maze = new int [i_max][j_max]; // 0 for walls and 1 for empty cells
+    static int [][] maze = new int [iMax][jMax]; // 0 for walls and 1 for empty cells
 
     /* static { line maze check
         maze[0][0] = 0;
@@ -31,8 +32,8 @@ public class Wave_maze_solving { // it needs to change 0 to -1 and 1 to 0 in the
 
     static { // maze initialization
 
-       for (int i = 0; i  < i_max; i ++) {
-           for (int j = 0; j < j_max; j ++) {
+       for (int i = 0; i  < iMax; i ++) {
+           for (int j = 0; j < jMax; j ++) {
                maze[i][j] = 0;
            }
        }
@@ -63,167 +64,173 @@ public class Wave_maze_solving { // it needs to change 0 to -1 and 1 to 0 in the
        maze[7][1] = -1;
     }
 
-    static ArrayList<Pair<Integer, Integer>> front_wave = new ArrayList<>(); // keeps the coordinates of cells which constitute the front wave in the current step of algorithm
-    static ArrayList<Pair<Integer, Integer>> new_front_wave = new ArrayList<>(); // keeps the new cells found
-    static ArrayList<Pair<Integer, Integer>> the_way_back = new ArrayList<>(); // here we will be storing all the cells of the restoring way back
+    static List<Pair<Integer, Integer>> frontWave = new ArrayList<>(); // keeps the coordinates of cells which constitute the front wave in the current step of algorithm
+    static List<Pair<Integer, Integer>> newFrontWave = new ArrayList<>(); // keeps the new cells found
+    static List<Pair<Integer, Integer>> theWayBack = new ArrayList<>(); // here we will be storing all the cells of the restoring way back
 
-    static int wave_steps_counter = 2; // the first step is the initialization of the front wave (point A)
+    static int waveStepsCounter = 2; // the first step is the initialization of the front wave (point A)
 
     static int iP, jP; // auxiliary coordinate variables
 
     static {
-        front_wave.add(new Pair<Integer, Integer>(i_start,j_start)); // initialization of the starting front wave
-        maze[i_start][j_start] = 1;
+        frontWave.add(new Pair<Integer, Integer>(iStart,jStart)); // initialization of the starting front wave
+        maze[iStart][jStart] = 1;
     }
 
     public static void main(String[] args) {
 
-        print_2D_array(maze);
+        findWay();
+
+    }
+
+    public static void findWay (/* int [][] maze, int iStart, int jStart, int jEnd, int iEnd */) {
+
+        print2dArray(maze);
         System.out.println();
 
         while (true) { // body of wave_emitting cycle
 
-            if (maze[i_end][j_end] == 0) {
+            if (maze[iEnd][jEnd] == 0) {
 
-                if (front_wave.size() == 0) {
+                if (frontWave.size() == 0) {
 
                     System.out.println("The way between A and B does not exist!");
                     break;
 
                 } else {
 
-                    for (Pair<Integer, Integer> p : front_wave)  { // four-links scheme of wave spreading
+                    for (Pair<Integer, Integer> p : frontWave)  { // four-links scheme of wave spreading
 
                         iP = p.getKey();
                         jP = p.getValue();
 
                         if (jP + 1 < maze[0].length && maze[iP][jP + 1] == 0) {
-                            maze[iP][jP + 1] = wave_steps_counter;
-                            new_front_wave.add(new Pair<Integer, Integer>(iP, jP + 1));
+                            maze[iP][jP + 1] = waveStepsCounter;
+                            newFrontWave.add(new Pair<Integer, Integer>(iP, jP + 1));
                         }
 
                         if (iP - 1 >= 0 && maze[iP - 1][jP] == 0) {
-                            maze[iP - 1][jP] = wave_steps_counter;
-                            new_front_wave.add(new Pair<Integer, Integer>(iP - 1, jP));
+                            maze[iP - 1][jP] = waveStepsCounter;
+                            newFrontWave.add(new Pair<Integer, Integer>(iP - 1, jP));
                         }
 
                         if (jP - 1 >= 0 && maze[iP][jP - 1] == 0) {
-                            maze[iP][jP - 1] = wave_steps_counter;
-                            new_front_wave.add(new Pair<Integer, Integer>(iP, jP - 1));
+                            maze[iP][jP - 1] = waveStepsCounter;
+                            newFrontWave.add(new Pair<Integer, Integer>(iP, jP - 1));
                         }
 
                         if (iP + 1 < maze.length && maze[iP + 1][jP] == 0) {
-                            maze[iP + 1][jP] = wave_steps_counter;
-                            new_front_wave.add(new Pair<Integer, Integer>(iP + 1, jP));
+                            maze[iP + 1][jP] = waveStepsCounter;
+                            newFrontWave.add(new Pair<Integer, Integer>(iP + 1, jP));
                         }
 
                     }
 
-                    front_wave.clear();
-                    front_wave.addAll(new_front_wave);
-                    new_front_wave.clear();
+                    frontWave.clear();
+                    frontWave.addAll(newFrontWave);
+                    newFrontWave.clear();
 
                     System.out.print("front wave: ");
-                    System.out.println(front_wave);
+                    System.out.println(frontWave);
                     System.out.println();
 
-                    wave_steps_counter++;
+                    waveStepsCounter++;
                 }
 
             } else { // if the value in B point has been changed we proceed to the pass restoration
 
-                pass_restoration();
+                passRestoration();
 
                 break;
             }
         }
 
         System.out.println();
-        print_2D_array(maze);
+        print2dArray(maze);
     }
 
-    public static void wave_spreading_step () { // turned to be unnecessary
-
-    }
-
-    public static void pass_restoration () {
+    public static void passRestoration () {
 
         System.out.println("Pass restored");
 
-        iP = i_end;
-        jP = j_end;
+        iP = iEnd;
+        jP = jEnd;
 
-        System.out.println("B value is " + maze[iP][jP]);
+        System.out.println("B coordinates: (" + iEnd + "," + jEnd + ")" + ", value: " + maze[iP][jP]);
 
-        the_way_back.add(new Pair<Integer, Integer>(iP, jP)); // adding B point to the end of the way back
+        theWayBack.add(new Pair<Integer, Integer>(iP, jP)); // adding B point to the end of the way back
 
-        for (int i = maze[iP][jP]; i >= 0 ; i --) {
-            if (iP != i_start || jP + 1 != j_start) {
+        for (int i = maze[iP][jP]; i >= 0 ; i--) {
+            if (iP != iStart || jP + 1 != jStart) {
                 if (jP + 1 < maze[0].length) {
                     if (maze[iP][jP] - maze[iP][jP + 1] == 1) {
                         jP++;
-                        the_way_back.add(new Pair<Integer, Integer>(iP, jP));
-                        System.out.println("adding (" + iP + "," + jP + ") " + i + "-iteration");
+                        theWayBack.add(new Pair<Integer, Integer>(iP, jP));
+                        System.out.println("adding (" + iP + "," + jP + ")" + ", cell value: " + (i - 1) + ", " + (waveStepsCounter - i) + "-iteration");
                         continue;
                     }
                 }
             } else {
-                the_way_back.add( new Pair<Integer, Integer>(iP, jP + 1));
+                System.out.println("A coordinates: (" + iStart + "," + jStart + ")" + ", value: " + maze[iStart][jStart]);
+                theWayBack.add(new Pair<Integer, Integer>(iP, jP + 1));
                 System.out.println("Pass restored");
-                System.out.println(the_way_back);
+                System.out.println(theWayBack);
                 break;
             }
 
-            if (iP - 1 != i_start || jP != j_start) {
+            if (iP - 1 != iStart || jP != jStart) {
                 if (iP - 1 >= 0) {
                     if (maze[iP][jP] - maze[iP - 1][jP] == 1) {
                         iP --;
-                        the_way_back.add(new Pair<Integer, Integer>(iP, jP));
-                        System.out.println("adding (" + iP + "," + jP + ") " + i + "-iteration");
+                        theWayBack.add(new Pair<Integer, Integer>(iP, jP));
+                        System.out.println("adding (" + iP + "," + jP + ")" + ", cell value: " + (i - 1) + ", " + (waveStepsCounter - i) + "-iteration");
                         continue;
                     }
                 }
             } else {
-                the_way_back.add( new Pair<Integer, Integer>(iP - 1, jP));
+                System.out.println("A coordinates: (" + iStart + "," + jStart + ")" + ", value: " + maze[iStart][jStart]);
+                theWayBack.add( new Pair<Integer, Integer>(iP - 1, jP));
                 System.out.println("Pass restored");
-                System.out.println(the_way_back);
+                System.out.println(theWayBack);
                 break;
             }
 
-            if (iP != i_start || jP - 1 != j_start) {
+            if (iP != iStart || jP - 1 != jStart) {
                 if (jP - 1 >= 0) {
                     if (maze[iP][jP] - maze[iP][jP - 1] == 1) {
                         jP --;
-                        the_way_back.add(new Pair<Integer, Integer>(iP, jP));
-                        System.out.println("adding (" + iP + "," + jP + ") " + i + "-iteration");
+                        theWayBack.add(new Pair<Integer, Integer>(iP, jP));
+                        System.out.println("adding (" + iP + "," + jP + ")" + ", cell value: " + (i - 1) + ", " + (waveStepsCounter - i) + "-iteration");
                         continue;
                     }
                 }
             } else {
-                the_way_back.add( new Pair<Integer, Integer>(iP, jP - 1));
+                System.out.println("A coordinates: (" + iStart + "," + jStart + ")" + ", value: " + maze[iStart][jStart]);
+                theWayBack.add( new Pair<Integer, Integer>(iP, jP - 1));
                 System.out.println("Pass restored");
-                System.out.println(the_way_back);
+                System.out.println(theWayBack);
                 break;
             }
 
-            if (iP + 1 != i_start || jP != j_start) {
+            if (iP + 1 != iStart || jP != jStart) {
                 if (iP + 1 < maze.length) {
                     if (maze[iP][jP] - maze[iP + 1][jP] == 1) {
                         iP ++;
-                        the_way_back.add( new Pair<Integer, Integer>(iP, jP));
-                        System.out.println("adding (" + iP + "," + jP + ") " + i + "-iteration");
+                        theWayBack.add( new Pair<Integer, Integer>(iP, jP));
+                        System.out.println("adding (" + iP + "," + jP + ")" + ", cell value: " + (i - 1) + ", " + (waveStepsCounter - i) + "-iteration");
                     }
                 }
             } else {
-                the_way_back.add( new Pair<Integer, Integer>(iP + 1, jP));
+                System.out.println("A coordinates: (" + iStart + "," + jStart + ")" + ", value: " + maze[iStart][jStart]);
+                theWayBack.add( new Pair<Integer, Integer>(iP + 1, jP));
                 System.out.println("Pass restored");
-                System.out.println(the_way_back);
+                System.out.println(theWayBack);
                 break;
             }
         }
     }
 
-    public static void print_2D_array (int [][] array) {
+    public static void print2dArray (int [][] array) {
         for (int j = 0; j < array[0].length; j ++) {
             for (int i = 0; i < array.length; i ++) {
                 System.out.print(array[i][j] + " ");
@@ -231,5 +238,4 @@ public class Wave_maze_solving { // it needs to change 0 to -1 and 1 to 0 in the
             System.out.println();
         }
     }
-
 }
