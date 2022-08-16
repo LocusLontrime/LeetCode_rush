@@ -26,7 +26,6 @@ public class Parenthesis {
 
         // tests
         System.out.println(isParenthesisCorrect("([{}])"));
-
         System.out.println(isParenthesisCorrect("{([)[](])}"));
     }
 
@@ -38,11 +37,11 @@ public class Parenthesis {
 
             Character currCh = expression.charAt(i);
 
-            if (openings.containsKey(currCh)) { // if the current char is the one of the opening pars
+            if (openings.containsKey(currCh)) { // if the current char is the one from the opening pars
 
                 parenthesisStack.add(openings.get(currCh));
 
-            } else if (closing.containsKey(currCh)) { // if the current char is the one of the closing pars
+            } else if (closing.containsKey(currCh)) { // if the current char is the one from the closing pars
 
                 if (parenthesisStack.size() > 0 && parenthesisStack.peek() == closing.get(currCh)) {
                     parenthesisStack.pop();

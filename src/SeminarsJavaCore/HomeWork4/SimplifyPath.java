@@ -7,9 +7,7 @@ public class SimplifyPath {
     public static void main(String[] args) {
 
         System.out.println(simplifyPath("/../"));
-
         System.out.println(simplifyPath("/home//foo/"));
-
     }
 
     public static String simplifyPath(String path) {
@@ -41,11 +39,11 @@ public class SimplifyPath {
 
         // Builds a result path, gathering directories all together
         StringBuilder canonicalPath = new StringBuilder();
-        for (String dir : directories) {
+        for (String directory : directories) {
             canonicalPath.append("/");
-            canonicalPath.append(dir);
+            canonicalPath.append(directory);
         }
 
-        return canonicalPath.length() > 0 ? canonicalPath.toString() : "/" ;
+        return canonicalPath.length() > 0 ? canonicalPath.toString() : "/";
     }
 }

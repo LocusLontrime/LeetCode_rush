@@ -101,7 +101,7 @@ public class Evaluation {
                     }
 
                     // evaluates the operator by recursively calling of the evaluatePostfixExpression method for the substring of mathExpression...
-                    double operatorAppliedValue = evalWordOperator(currOpStr, evaluatePostfixExpression(infixToPostfix(mathExpression.substring(index, newIndex - 1))));
+                    double operatorAppliedValue = evalWordOperator(currOpStr, evaluate(mathExpression.substring(index, newIndex - 1)));
 
                     postfixArray.add(operatorAppliedValue);
                     index = newIndex;
