@@ -175,17 +175,9 @@ public class Evaluation {
         // cycling through the expression
         for (Object token : postfixExpression) {
 
-            if (token instanceof Integer ) {
-
-                operandsStack.push(1.0 * (Integer) token);
-
-            } else if (token instanceof Double) {
+            if (token instanceof Double) {
 
                 operandsStack.push((Double) token);
-
-            } else if (token instanceof Float) {
-
-                operandsStack.push(1.0 * (Float) token);
 
             } else {
 

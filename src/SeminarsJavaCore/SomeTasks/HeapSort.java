@@ -1,6 +1,6 @@
 package SeminarsJavaCore.SomeTasks;
 
-public class HeapSort {
+public class HeapSort { // maybe another time
 
     public static void main(String[] args) {
 
