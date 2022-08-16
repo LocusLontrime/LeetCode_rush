@@ -204,7 +204,7 @@ public class Evaluation {
             case '%':
                 return op1 % op2;
             case '^':
-                return (int) Math.pow(op1, op2);
+                return Math.pow(op1, op2);
             case '/':
                 return op1 / op2;
             case '*':
