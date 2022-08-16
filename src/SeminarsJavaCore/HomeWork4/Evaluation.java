@@ -30,7 +30,7 @@ public class Evaluation {
 
     public static void main(String[] args) {
 
-        List<Object> list = infixToPostfix("6 ^ 10 % 6 - 7 / 7 + 9");
+        List<Object> list = infixToPostfix("6 ^ 10 % 6 - 7 / 7 + 9"); // works without words-operators like a usual infix-to-postfix translator
 
         for (Object o : list) System.out.print(o + " ");
         System.out.println();
@@ -59,8 +59,8 @@ public class Evaluation {
         mathExpression = mathExpression.trim().toLowerCase(); // for the further convenience
         int eLength = mathExpression.length();
 
-        Stack<Object> operatorsStack  = new Stack<>(); // stack for operators like: %^*/+-
-        List<Object> postfixArray = new ArrayList<>(); // for building the postfix variant of the expression given
+        Stack<Character> operatorsStack  = new Stack<>(); // stack for operators like: %^*/+-
+        List<Object> postfixArray = new ArrayList<>(); // for building the postfix variant of the expression given (Strings and Doubles)git
 
         char currChar;
         StringBuilder currNumber; // var for building numbers from the math expression
