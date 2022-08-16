@@ -6,7 +6,7 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
     public static int recCounter;
 
-    public static void main(String[] args) throws Exception { // 366
+    public static void main(String[] args) throws Exception { // 36 366 98 989
 
         long start = System.nanoTime();
 

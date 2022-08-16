@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InterviewTask {
+public class InterviewTask { // Маркуша
 
     private static List<String> clones;
 
-    private static Map<Character, Character> rusEnSameLetters = new HashMap<Character, Character>() {{
+    private static final Map<Character, Character> rusEnSameLetters = new HashMap<Character, Character>() {{
 
         put('а', 'a');
         put('А', 'A');
@@ -23,10 +23,11 @@ public class InterviewTask {
         put('В', 'B');
         put('с', 'c');
         put('С', 'C');
+        put('М', 'M');
 
     }};
 
-    private static Map<Character, Character> enRusSameLetters= new HashMap<Character, Character>() {{
+    private static final Map<Character, Character> enRusSameLetters= new HashMap<Character, Character>() {{
 
         put('a', 'а');
         put('A', 'А');
@@ -40,8 +41,9 @@ public class InterviewTask {
         put('B', 'В');
         put('c', 'с');
         put('C', 'С');
+        put('M', 'М');
 
-    }};;
+    }};
 
     public static void main(String[] args) {
 
@@ -81,7 +83,6 @@ public class InterviewTask {
             recursiveSeeker(s, newS.append(rusEnSameLetters.get(currCh)), currIndex + 1);
             newS.delete(newS.length() - 1, newS.length());
         }
-
     }
 
     public static void printClones(List<String> clones) {

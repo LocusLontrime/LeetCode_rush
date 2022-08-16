@@ -15,7 +15,7 @@ public class KnightsTour { // 36 366 98 989
 
     public static void main(String[] args) throws Exception{
         System.out.println(isValid(8, deltas[0][2], deltas[1][2]) + " " + deltas.length);
-        printBoard(findKnightsTour(174)); // till 174 on even size and 155 on odd works perfectly!!!
+        printBoard(findKnightsTour(43)); // till 174 on even size and 155 on odd works perfectly!!!
     }
 
     public static int[][] findKnightsTour(int boardSize) throws Exception {

@@ -1,4 +1,4 @@
-package SeminarsJavaCore.SomeTasks;
+package SeminarsJavaCore.HomeWork4;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Stack;
 
 public class Parenthesis {
 
+    // dictionaries for different kinds of parentheses
     private static Map<Character, Integer> openings = new HashMap<Character, Integer>() {{
         put('(', 1);
         put('[', 2);
@@ -23,6 +24,7 @@ public class Parenthesis {
 
     public static void main(String[] args) {
 
+        // tests
         System.out.println(isParenthesisCorrect("([{}])"));
 
         System.out.println(isParenthesisCorrect("{([)[](])}"));
@@ -30,17 +32,17 @@ public class Parenthesis {
 
     public static boolean isParenthesisCorrect(String expression) {
 
-        Stack<Integer> parenthesisStack = new Stack<>();
+        Stack<Integer> parenthesisStack = new Stack<>(); // stack for par-nums
 
-        for (int i = 0; i < expression.length(); i++) {
+        for (int i = 0; i < expression.length(); i++) { // cycling all over expression given (not only parentheses can occur)
 
             Character currCh = expression.charAt(i);
 
-            if (openings.containsKey(currCh)) {
+            if (openings.containsKey(currCh)) { // if the current char is the one of the opening pars
 
                 parenthesisStack.add(openings.get(currCh));
 
-            } else if (closing.containsKey(currCh)) {
+            } else if (closing.containsKey(currCh)) { // if the current char is the one of the closing pars
 
                 if (parenthesisStack.size() > 0 && parenthesisStack.peek() == closing.get(currCh)) {
                     parenthesisStack.pop();
@@ -50,6 +52,6 @@ public class Parenthesis {
             }
         }
 
-        return parenthesisStack.size() == 0;
+        return parenthesisStack.size() == 0; // stack must be empty if the parenthesis structure is valid
     }
 }
