@@ -15,7 +15,7 @@ public class Find_nth_Digit_In_a_Infinite_Addition_Result_3kyu { // accepted on 
 //        System.out.println(findDigit(1000000));
 //        System.out.println(findDigit(10000000));
 //        System.out.println(findDigit(100000000));
-        System.out.println(findDigit(1000000000));
+        System.out.println(findDigit(1000000000));  // 657897 65879 5 3
 
 //
 //        System.out.println(findDigit(9));

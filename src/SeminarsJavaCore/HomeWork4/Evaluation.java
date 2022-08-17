@@ -4,11 +4,12 @@ import java.util.*;
 
 public class Evaluation {
 
+    // sets for possible symbols storing
     public static Set<Character> numbers = new HashSet<>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
     public static Set<Character> alphabet = new HashSet<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
     public static Set<Character> ops = new HashSet<>(Arrays.asList('%', '^', '*', '/', '+', '-'));
 
-    public static Map<String, Double> constants = new HashMap<String, Double>() {{
+    public static Map<String, Double> constants = new HashMap<String, Double>() {{ // constants-collection, can be extended
 
         put("pi", Math.PI);
         put("e", Math.E);
@@ -16,7 +17,8 @@ public class Evaluation {
 
     }};
 
-    public static Map <Character, Integer> opsPriority = new HashMap<Character, Integer>() {{
+    public static Map <Character, Integer> opsPriority = new HashMap<Character, Integer>() {{ // word-operators-collection, can be extended
+        // (do not forget to extend evalWordOperator() method too
 
         put('%', 5);
         put('^', 4);
@@ -28,7 +30,7 @@ public class Evaluation {
 
     }};
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // tests and so on
 
         List<Object> list = infixToPostfix("6 ^ 10 % 6 - 7 / 7 + 9"); // works without words-operators like a usual infix-to-postfix translator
 
@@ -41,7 +43,9 @@ public class Evaluation {
 
         System.out.println(evaluate("(2^3 * (10 / (5 - 3)))^(Sin(Pi))"));
 
-        System.out.println(evaluate("log(200000 - 100000) / 7.99 + 2 ^ 3 * cosh(sin(9.989 * pi) + abs(1.1989 - 2.19898))"));
+        System.out.println(evaluate("Sin(Pi)"));
+
+        System.out.println(evaluate("log(200000 - 100000) / 7.99 + 2 ^ 3 * cosh(sin(9.989 * pi) + abs(1.1989 - 2.19898))")); // something more difficult
 
         // System.out.println(numbers.contains(' '));
 
@@ -59,10 +63,10 @@ public class Evaluation {
         mathExpression = mathExpression.trim().toLowerCase(); // for the further convenience
         int eLength = mathExpression.length();
 
-        Stack<Character> operatorsStack  = new Stack<>(); // stack for operators like: %^*/+-
-        List<Object> postfixArray = new ArrayList<>(); // for building the postfix variant of the expression given (Strings and Doubles)git
+        Stack<Character> operatorsStack  = new Stack<>(); // stack for simple operators like: %^*/+-
+        List<Object> postfixArray = new ArrayList<>(); // for building the postfix variant of the expression given (Strings and Doubles)
 
-        char currChar;
+        char currChar; // current character of the expression
         StringBuilder currNumber; // var for building numbers from the math expression
         StringBuilder currOperator; // var for building word-operators from the math expression
 
@@ -100,7 +104,8 @@ public class Evaluation {
                         newIndex++;
                     }
 
-                    // evaluates the operator by recursively calling of the evaluatePostfixExpression method for the substring of mathExpression...
+                    // evaluates the operator by recursively calling of the evaluatePostfixExpression(expr) = evaluatePostfixExpression(infixToPostfix(expr))
+                    // method for the substring of mathExpression...
                     double operatorAppliedValue = evalWordOperator(currOpStr, evaluate(mathExpression.substring(index, newIndex - 1)));
 
                     postfixArray.add(operatorAppliedValue);
@@ -129,9 +134,10 @@ public class Evaluation {
 
             } else if (currChar == ')') {
 
-                Object topToken = operatorsStack.pop();
+                Character topToken = operatorsStack.pop();
 
-                while(topToken instanceof Character && (Character) topToken != '(') {
+                // error of an Object type and instance of operator been fixed
+                while(topToken != '(') {
 
                     postfixArray.add(topToken);
                     topToken = operatorsStack.pop();
@@ -200,63 +206,92 @@ public class Evaluation {
 
         Character operator = (Character) token;
 
+        double res;
+
         switch (operator) {
             case '%':
-                return op1 % op2;
+                res = op1 % op2;
+                break;
             case '^':
-                return Math.pow(op1, op2);
+                res = Math.pow(op1, op2);
+                break;
             case '/':
-                return op1 / op2;
+                res = op1 / op2;
+                break;
             case '*':
-                return op1 * op2;
+                res = op1 * op2;
+                break;
             case '+':
-                return op1 + op2;
+                res = op1 + op2;
+                break;
             case '-':
-                return op1 - op2;
+                res = op1 - op2;
+                break;
             default:
                 System.out.println("error");
-                return -1;
+                res = -1;
         }
+
+        return res;
     }
 
     // evaluates the math operators like log and sin
     public static double evalWordOperator(String wordOperator, double value) {
 
+        double res;
+
         switch (wordOperator) {
             case "log":
-                return Math.log10(value);
+                res = Math.log10(value);
+                break;
             case "ln":
-                return Math.log(value);
+                res = Math.log(value);
+                break;
             case "log2":
-                return Math.log(value) / Math.log(2);
+                res = Math.log(value) / Math.log(2);
+                break;
             case "sin":
-                return Math.sin(value);
+                res = Math.sin(value);
+                break;
             case "cos":
-                return Math.cos(value);
+                res = Math.cos(value);
+                break;
             case "tan":
-                return Math.tan(value);
+                res = Math.tan(value);
+                break;
             case "ctg":
-                return Math.cos(value) / Math.sin(value);
+                res = Math.cos(value) / Math.sin(value);
+                break;
             case "asin":
-                return Math.asin(value);
+                res = Math.asin(value);
+                break;
             case "acos":
-                return Math.acos(value);
+                res = Math.acos(value);
+                break;
             case "atan":
-                return Math.atan(value);
+                res = Math.atan(value);
+                break;
             case "sinh":
-                return Math.sinh(value);
+                res = Math.sinh(value);
+                break;
             case "cosh":
-                return Math.cosh(value);
+                res = Math.cosh(value);
+                break;
             case "tanh":
-                return Math.tanh(value);
+                res = Math.tanh(value);
+                break;
             case "ctgh":
-                return Math.cosh(value) / Math.sinh(value);
+                res = Math.cosh(value) / Math.sinh(value);
+                break;
             case "abs":
-                return Math.abs(value);
+                res = Math.abs(value);
+                break;
             default:
                 System.out.println("The unknown operator");
                 // mb throw an Exception?
-                return -1; // it is not important what to return in this case
+                res = -1; // it is not important what to return in this case
         }
+
+        return res;
     }
 }
