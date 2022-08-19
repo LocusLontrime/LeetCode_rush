@@ -2,8 +2,9 @@ package SeminarsJavaCore.HomeWork5;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Intersection_of_Two_Arrays_II {
+public class Intersection_of_Two_Arrays_II {36
 
     public static void main(String[] args) {
         int[] nums1 = {4,9,5};
@@ -13,17 +14,17 @@ public class Intersection_of_Two_Arrays_II {
 
     public static int[] intersect(int[] nums1, int[] nums2) {
         int counter = 0;
-        HashMap<Integer, Integer> map1 = new HashMap<>();
+        Map<Integer, Integer> elementsFreq = new HashMap<>();
 
         for (int i : nums1) {
-            if (map1.containsKey(i)) map1.put(i, map1.get(i) + 1);
-            else map1.put(i, 1);
+            if (elementsFreq.containsKey(i)) elementsFreq.put(i, elementsFreq.get(i) + 1);
+            else elementsFreq.put(i, 1);
         }
 
         for (int i : nums2) {
-            if (map1.containsKey(i)) {
-                if (map1.get(i) > 1) map1.put(i, map1.get(i) - 1);
-                else map1.remove(i);
+            if (elementsFreq.containsKey(i)) {
+                if (elementsFreq.get(i) > 1) elementsFreq.put(i, elementsFreq.get(i) - 1);
+                else elementsFreq.remove(i);
                 nums1[counter++] = i;
             }
         }
