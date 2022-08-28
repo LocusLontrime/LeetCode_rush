@@ -3,8 +3,6 @@ package Leet_code_rush.Dynamic_Programming;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
-
 public class Digit_Count_in_Range_1067 {
 
     static int N;

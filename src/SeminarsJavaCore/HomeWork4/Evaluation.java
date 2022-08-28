@@ -37,15 +37,20 @@ public class Evaluation {
         for (Object o : list) System.out.print(o + " ");
         System.out.println();
 
-        System.out.println(evaluatePostfixExpression(list));
+//        System.out.println(evaluatePostfixExpression(list));
+//
+//        System.out.println(Double.parseDouble("989"));
+//
+//        System.out.println(evaluate("(2^3 * (10 / (5 - 3)))^(Sin(Pi))"));
+//
+//        System.out.println(evaluate("Sin(Pi)"));
+//
+//        System.out.println(evaluate("log(200000 - 100000) / 7.99 + 2 ^ 3 * cosh(sin(9.989 * pi) + abs(1.1989 - 2.19898))")); // something more difficult
 
-        System.out.println(Double.parseDouble("989"));
+        System.out.println(infixToPostfix("8 * 4 ^ ((3 + 6) ^ (2 ^ 1))"));
+        System.out.println(evaluate("8 * 4 ^ ((3 + 6) ^ (2 ^ 1))"));
 
-        System.out.println(evaluate("(2^3 * (10 / (5 - 3)))^(Sin(Pi))"));
-
-        System.out.println(evaluate("Sin(Pi)"));
-
-        System.out.println(evaluate("log(200000 - 100000) / 7.99 + 2 ^ 3 * cosh(sin(9.989 * pi) + abs(1.1989 - 2.19898))")); // something more difficult
+        System.out.println("36,6 98");
 
         // System.out.println(numbers.contains(' '));
 
@@ -214,6 +219,7 @@ public class Evaluation {
                 break;
             case '^':
                 res = Math.pow(op1, op2);
+                System.out.println("op2: " + op2 + " op1: " + op1 + " res: " + res);
                 break;
             case '/':
                 res = op1 / op2;

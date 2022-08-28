@@ -13,7 +13,7 @@ public class nQueens {
 
     public static void main(String[] args) {
 
-        System.out.println("All placements number: " + TotalNQueens(8) + "\n");
+        System.out.println("All placements number: " + TotalNQueens(9) + "\n");
 
         System.out.println("All placements Queens coordinates:\n");
 
