@@ -27,5 +27,4 @@ public class Prime_Streaming_PG_13_3kyu {
         boolean[] ps = new Prime_Streaming_PG_13_3kyu().primes;
         return IntStream.iterate(2, i -> i + 1);
     }
-
 }
