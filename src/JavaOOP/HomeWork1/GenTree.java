@@ -76,7 +76,25 @@ public class GenTree {
         }
     }
 
-    public boolean removePerson(Person person) {
+    public boolean removePerson(Person person) throws Exception {
+
+        if (!relatives.keySet().contains(person)) {
+            throw new Exception("There is no such person in the family tree");
+        }
+
+        relatives.remove(person);
+
+        for (Person key : relatives.keySet()) {
+            ListIterator<Pair<Person, Link>> iterator = relatives.get(key).listIterator();
+
+            while (iterator.hasNext()) {
+                Pair<Person, Link> pair = iterator.next();
+                if (pair.getKey() == person) {
+                    iterator.remove();
+                }
+            }
+        }
+
         return true;
     }
 
@@ -93,7 +111,7 @@ public class GenTree {
         }
     }
 
-    private Person getPersonByLink(Person base, Link link) {
+    private Person getPersonByLink(Person base, Link link) { // what if more than 1 person been found?
         for (Pair<Person, Link> pair : relatives.get(base)) {
             if (pair.getValue() == link) {
                 return pair.getKey();
@@ -101,6 +119,20 @@ public class GenTree {
         }
 
         return null;
+    }
+
+    public void showRelatives(Person person) throws Exception {
+
+        if (!relatives.keySet().contains(person)) {
+            throw new Exception("There is no such person in the family tree");
+        }
+
+        StringBuilder b = new StringBuilder(person + ": [");
+        for (Pair<Person, Link> p: relatives.get(person)) {
+            b.append(p.getKey()).append(": ").append(p.getValue()).append(", ");
+        }
+        b.replace(b.length() - 2, b.length(), "");
+        System.out.println(b + "]");
     }
 
     public void showGraph() {

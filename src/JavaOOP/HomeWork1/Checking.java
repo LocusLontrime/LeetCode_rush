@@ -25,6 +25,10 @@ public class Checking {
 
         tree.addPerson(levi, vica, Link.DAUGHTER);
 
+        tree.removePerson(vica);
+
+        tree.showRelatives(levi);
+
         // tree.addPerson(null, null, null); -> tests
 
         tree.showGraph();
