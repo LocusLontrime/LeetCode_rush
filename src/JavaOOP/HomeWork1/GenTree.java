@@ -78,7 +78,7 @@ public class GenTree {
 
     public boolean removePerson(Person person) throws Exception {
 
-        if (!relatives.keySet().contains(person)) {
+        if (!relatives.containsKey(person)) {
             throw new Exception("There is no such person in the family tree");
         }
 
@@ -95,7 +95,7 @@ public class GenTree {
             }
         }
 
-        return true;
+        return true; // needed?)
     }
 
     public Link getInvertedLink(Link link, Person p) {
@@ -111,7 +111,7 @@ public class GenTree {
         }
     }
 
-    private Person getPersonByLink(Person base, Link link) { // what if more than 1 person been found?
+    private Person getPersonByLink(Person base, Link link) { // what if more than 1 person been found? -> further updates
         for (Pair<Person, Link> pair : relatives.get(base)) {
             if (pair.getValue() == link) {
                 return pair.getKey();
@@ -123,7 +123,7 @@ public class GenTree {
 
     public void showRelatives(Person person) throws Exception {
 
-        if (!relatives.keySet().contains(person)) {
+        if (!relatives.containsKey(person)) {
             throw new Exception("There is no such person in the family tree");
         }
 
@@ -167,14 +167,14 @@ class Person {
         return sex;
     }
 
-    private String firstName;  // name
-    private String lastName;  // surname
+    private final String firstName;  // name
+    private final String lastName;  // surname
 
-    private String fathersName; // otchestvo
+    private final String fathersName; // otchestvo
 
-    private int year; // birthday year
+    private final int year; // birthday year
 
-    private Sex sex;
+    private final Sex sex;
 
     public Person(String fName, String lName, String o, Sex s, int y) {
         firstName = fName;
@@ -199,7 +199,7 @@ class Person {
     }
 }
 
-enum Link {
+enum Link {  // can be extended -> but it requires more subtle and complicated logic in addPerson() method
     FATHER,
     MOTHER,
     SON,
@@ -208,7 +208,7 @@ enum Link {
     WIFE
 }
 
-enum Sex {
+enum Sex {  // just two for simplicity
     MALE,
     FEMALE
 }
