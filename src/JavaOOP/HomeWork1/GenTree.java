@@ -6,7 +6,10 @@ import java.util.*;
 
 public class GenTree {
 
-    private Map<Link, List<Link>> invertedOnes = new HashMap<Link, List<Link>>() {{ // in constructor or not?
+    // here we will be storing some hashes of added persons in order to check while adding on coincidences
+    // -> in further updates
+
+    private final Map<Link, List<Link>> invertedOnes = new HashMap<Link, List<Link>>() {{ // in constructor or not?
         put(Link.SON, new ArrayList<Link>() {{  // vs Arrays.asList()?
             add(Link.FATHER);
             add(Link.MOTHER);
