@@ -25,13 +25,17 @@ public class Checking {
 
         tree.addPerson(levi, vica, Link.DAUGHTER);
 
-        tree.removePerson(vica);
+        // tree.removePerson(vica);
 
-        tree.showRelatives(levi);
+        Researcher researcher = new Researcher("Levi Gin");
+
+        researcher.showRelatives(tree, levi);
+
+        // tree.addPerson(vica, sophia, Link.DAUGHTER);
 
         // tree.addPerson(null, null, null); -> tests
 
-        tree.showGraph();
+        researcher.showGraph(tree);
     }
 
 }

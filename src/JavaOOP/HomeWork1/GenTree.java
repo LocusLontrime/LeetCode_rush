@@ -124,82 +124,43 @@ public class GenTree {
         return null;
     }
 
-    public void showRelatives(Person person) throws Exception {
+//    public void showRelatives(Person person) throws Exception {
+//
+//        if (!relatives.containsKey(person)) {
+//            throw new Exception("There is no such person in the family tree");
+//        }
 
-        if (!relatives.containsKey(person)) {
-            throw new Exception("There is no such person in the family tree");
-        }
-
-        StringBuilder b = new StringBuilder(person + ": [");
-        for (Pair<Person, Link> p: relatives.get(person)) {
-            b.append(p.getKey()).append(": ").append(p.getValue()).append(", ");
-        }
-        b.replace(b.length() - 2, b.length(), "");
-        System.out.println(b + "]");
+    public Map<Link, List<Link>> getInvertedOnes() {
+        return invertedOnes;
     }
 
-    public void showGraph() {
-        int counter = 0;
-
-        StringBuilder b;
-
-        for (Person key : relatives.keySet()) {
-            b = new StringBuilder("");
-            b.append(++counter).append(". ").append(key).append(" : [");
-            for (Pair<Person, Link> pair: relatives.get(key)) {
-                 b.append(pair.getKey()).append(": ").append(pair.getValue()).append(", ");
-            }
-            b.replace(b.length() - 2, b.length(), "");
-            System.out.println(b + "]");
-        }
+    public Map<Person, List<Pair<Person, Link>>> getRelatives() {
+        return relatives;
     }
-}
-
-// class for describing persons
-class Person {
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    private final String firstName;  // name
-    private final String lastName;  // surname
-
-    private final String fathersName; // otchestvo
-
-    private final int year; // birthday year
-
-    private final Sex sex;
-
-    public Person(String fName, String lName, String o, Sex s, int y) {
-        firstName = fName;
-        lastName = lName;
-        fathersName = o;
-        sex = s;
-        year = y;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return firstName.equals(person.firstName) && lastName.equals(person.lastName) &&
-                fathersName.equals(person.lastName) && sex == person.sex && year == person.year;
-    }
-
-    @Override
-    public String toString() {
-        return lastName + " " + firstName + " " + fathersName;
-    }
+//
+//        StringBuilder b = new StringBuilder(person + ": [");
+//        for (Pair<Person, Link> p: relatives.get(person)) {
+//            b.append(p.getKey()).append(": ").append(p.getValue()).append(", ");
+//        }
+//        b.replace(b.length() - 2, b.length(), "");
+//        System.out.println(b + "]");
+//    }
+//
+//    public void showGraph() {
+//        int counter = 0;
+//
+//        StringBuilder b;
+//
+//        for (Person key : relatives.keySet()) {
+//            b = new StringBuilder("");
+//            b.append(++counter).append(". ").append(key).append(" : [");
+//            for (Pair<Person, Link> pair: relatives.get(key)) {
+//                 b.append(pair.getKey()).append(": ").append(pair.getValue()).append(", ");
+//            }
+//            b.replace(b.length() - 2, b.length(), "");
+//            System.out.println(b + "]");
+//        }
+//    }
 }
 
 enum Link {  // can be extended -> but it requires more subtle and complicated logic in addPerson() method
