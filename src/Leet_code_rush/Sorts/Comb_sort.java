@@ -1,8 +1,6 @@
 package Leet_code_rush.Sorts;
 
-import Leet_code_rush.Sorts.Q_sort_ints;
-
-public class Comb_sort {
+public class Comb_sort {  // optimized bubble sort
 
     static int[]array;
     static int n_auxiliary;

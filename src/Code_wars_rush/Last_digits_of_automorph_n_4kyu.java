@@ -2,7 +2,6 @@ package Code_wars_rush;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeSet;
 
 public class Last_digits_of_automorph_n_4kyu {
@@ -19,13 +18,14 @@ public class Last_digits_of_automorph_n_4kyu {
 
         // System.out.println(hensels_lemma(base, digits));
 
-//        System.out.println(get(30000));
-        System.out.println(get(10));
-        System.out.println(get(130));
+        System.out.println(get(1000000));
+//        System.out.println(get(10));
+//        System.out.println(get(130));
+//        System.out.println(get(5000));
 
         long finish = System.nanoTime();
 
-        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000 + " solCounter:");
+        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000000 + " solCounter:");
 
     }
 
@@ -57,8 +57,8 @@ public class Last_digits_of_automorph_n_4kyu {
 
         while (counter < number) {
 
-            BigInteger numSquared = num.multiply(num); // 625
-            BigInteger powOfTen = new BigInteger("10").pow(digitNo); // 1000
+            BigInteger numSquared = num.multiply(num); // 25
+            BigInteger powOfTen = new BigInteger("10").pow(digitNo); // 100
 
             num = numSquared.mod(powOfTen);
             num2 = powOfTen.add(new BigInteger("1")).subtract(num); // 76

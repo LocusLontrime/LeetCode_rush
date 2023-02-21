@@ -2,7 +2,7 @@ package Code_wars_rush;
 
 import java.util.Arrays;
 
-public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted on codewars.com, 4kyu factorial version too
+public class Integer_Square_Root_2kyu_added { // TODO 2 kyu int square root accepted on codewars.com, 4kyu factorial version too
 
     public static int recCounter;
 
@@ -27,7 +27,7 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
 
         java.math.BigInteger big;
 
-        System.out.println("\nПрошло времени в микросекундах : " + (finish - start) / 1000);
+        System.out.println("\nПрошло времени в милисекундах : " + (finish - start) / 1000000);
     }
 
     public static class BigInteger {
@@ -108,9 +108,9 @@ public class Integer_Square_Root_2kyu { // TODO 2 kyu int square root accepted o
             BigInteger square = pivotElement.multiply(pivotElement);
             BigInteger nextSquare = square.add(pivotElement.multiply(new BigInteger("2")).add(BigInteger.ONE));
 
-            System.out.println(recCounter + "-th current pivot element equals: " + pivotElement );
+            // System.out.println(recCounter + "-th current pivot element equals: " + pivotElement );
 
-            Thread.sleep(100);
+            // Thread.sleep(100);
 
             if (square.compareTo(N) == 0 ||
                     ( square.compareTo(N) == -1 && nextSquare.compareTo(N) == 1) ) {

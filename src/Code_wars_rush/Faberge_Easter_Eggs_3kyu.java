@@ -1,14 +1,11 @@
 package Code_wars_rush;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.LongStream;
 
 
 public class Faberge_Easter_Eggs_3kyu {
 
-    public static void main(String[] args) {
+    public static void main(String[] args   ) {
 
         long start = System.nanoTime();
 
